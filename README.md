@@ -120,6 +120,3 @@
 
 * **ライセンス :** The MIT License (MIT)
 * **ライセンス全文 :** [licenses/MaterialChartPlugin.txt](licenses/MaterialChartPlugin.txt)
-
-
-

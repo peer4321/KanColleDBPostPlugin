@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBPostPlugin", "DBPostPlugin\DBPostPlugin.csproj", "{82E1633E-517A-41D5-8456-C3F835AD986B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{58210AB0-3267-47AF-B754-BD761B6C2564}"
+	ProjectSection(SolutionItems) = preProject
+		licenses\Apache.txt = licenses\Apache.txt
+		licenses\BattleInfoPlugin.txt = licenses\BattleInfoPlugin.txt
+		licenses\KanColleViewer.txt = licenses\KanColleViewer.txt
+		licenses\KanColleViewer_about518.txt = licenses\KanColleViewer_about518.txt
+		LICENSE = LICENSE
+		licenses\MaterialChartPlugin.txt = licenses\MaterialChartPlugin.txt
+		licenses\MetroRadiance.txt = licenses\MetroRadiance.txt
+		licenses\MetroTrilithon.txt = licenses\MetroTrilithon.txt
+		licenses\Nekoxy.txt = licenses\Nekoxy.txt
+		README.md = README.md
+		licenses\StatefulModel.txt = licenses\StatefulModel.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82E1633E-517A-41D5-8456-C3F835AD986B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82E1633E-517A-41D5-8456-C3F835AD986B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82E1633E-517A-41D5-8456-C3F835AD986B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82E1633E-517A-41D5-8456-C3F835AD986B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
