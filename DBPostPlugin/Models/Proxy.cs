@@ -1,14 +1,10 @@
 ﻿using DBPostPlugin.Models.Settings;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleWrapper;
-using Grabacr07.KanColleWrapper.Models.Raw;
 using Livet;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace DBPostPlugin.Models
@@ -61,7 +57,7 @@ namespace DBPostPlugin.Models
                         {
                             System.Collections.Specialized.NameValueCollection post
                                 = new System.Collections.Specialized.NameValueCollection();
-                            post.Add("Token", ToolSettings.DbAccessKey);
+                            post.Add("token", ToolSettings.DbAccessKey);
                             post.Add("agent", "LZXNXVGPejgSnEXLH2ur");
                             post.Add("url", x.Request.PathAndQuery);
                             string requestBody = System.Text.RegularExpressions.Regex.Replace(x.Request.BodyAsString, @"&api(_|%5F)token=[0-9a-f]+|api(_|%5F)token=[0-9a-f]+&?", "");
