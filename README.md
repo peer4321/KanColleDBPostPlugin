@@ -12,6 +12,11 @@
 アクセスキーを入力することで使用できます。
 * 変更した設定は自動的に保存されます。
 
+### ダウンロード
+
+* [![Build status](https://ci.appveyor.com/api/projects/status/fen8euuwhcuv1r5j?svg=true)](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/build/artifacts) [KanColleDBPostPlugin - AppVeyor](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/build/artifacts)
+* ダウンロードしたDLLファイルのブロックを忘れずに解除してくださいね。
+
 ### ライセンス
 
 * [The MIT License (MIT)](LICENSE)
