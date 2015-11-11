@@ -41,6 +41,7 @@
                         <Run Text="アクセスキー" />
                     </TextBlock>
                     <metro:PromptTextBox Grid.Column="1"
+                                         Prompt="アクセスキー"
                                          Text="{Binding Source={x:Static ms:ToolSettings.DbAccessKey}, Path=Value, Mode=TwoWay}" />
                 </Grid>
             </StackPanel>
@@ -49,7 +50,7 @@
                        Style="{DynamicResource SeparatorRectangleStyleKey}"
                        Margin="0,0,0,10" />
 
-            <CheckBox Content="データを送信したら通知します"
+            <CheckBox Content="データを送信した時に通知します"
                       IsChecked="{Binding Source={x:Static ms:ToolSettings.NotifyLog}, Path=Value}"
                       Margin="20,10,0,0" />
             
