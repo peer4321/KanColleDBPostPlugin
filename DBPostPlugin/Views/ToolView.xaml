@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="DBPostPlugin.Views.ToolView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:metro="http://schemes.grabacr.net/winfx/2014/controls"
+             xmlns:local="clr-namespace:DBPostPlugin"
+             xmlns:ms="clr-namespace:DBPostPlugin.Models.Settings"
+             xmlns:kanColleWrapper="clr-namespace:Grabacr07.KanColleWrapper;assembly=KanColleWrapper"
+             Background="{DynamicResource ThemeBrushKey}"
+             Foreground="{DynamicResource ActiveForegroundBrushKey}"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/PluginStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="12,0,12,12">
+            <TextBlock Text="艦これ統計データベースの送信設定"
+                       Margin="0,10,0,8" />
+            
+            <CheckBox Content="艦これ統計データベースへデータを送信します"
+                      IsChecked="{Binding Source={x:Static ms:ToolSettings.SendDb}, Path=Value}"
+                      Margin="20,10,0,0" />
+            
+            <StackPanel IsEnabled="{Binding Source={x:Static ms:ToolSettings.SendDb}, Path=Value}"
+                        Margin="40,6,0,6">
+                <Grid Margin="0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="300" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0">
+                        <Run Text="アクセスキー" />
+                    </TextBlock>
+                    <metro:PromptTextBox Grid.Column="1"
+                                         Prompt="アクセスキー"
+                                         Text="{Binding Source={x:Static ms:ToolSettings.DbAccessKey}, Path=Value, Mode=TwoWay}" />
+                </Grid>
+            </StackPanel>
+            
+            <Rectangle Height="1"
+                       Style="{DynamicResource SeparatorRectangleStyleKey}"
+                       Margin="0,0,0,10" />
+
+            <CheckBox Content="データを送信した時に通知します"
+                      IsChecked="{Binding Source={x:Static ms:ToolSettings.NotifyLog}, Path=Value}"
+                      Margin="20,10,0,0" />
+            
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
