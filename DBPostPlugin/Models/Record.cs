@@ -12,14 +12,7 @@ namespace DBPostPlugin.Models
         public string TimestampStr { get { return Timestamp.ToString("yyyy-MM-dd HH:mm:ss"); } }
 
         public Api Api { get; }
-        public string ApiStr { get
-            {
-                switch (Api)
-                {
-                    default:
-                        return "分からん";
-                }
-            } }
+        public string ApiStr { get { return Api.GetDescription() ?? "知らない子"; } }
 
         public string Description { get; }
 

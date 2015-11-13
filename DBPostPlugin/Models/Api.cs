@@ -21,6 +21,7 @@ namespace DBPostPlugin.Models
     public enum Api
     {
         [ApiUrl("api_port/port")]
+        [Description("母港")]
         api_port_port,
         [ApiUrl("api_get_member/ship2")]
         api_get_member_ship2,
@@ -33,12 +34,16 @@ namespace DBPostPlugin.Models
         [ApiUrl("api_get_member/mapinfo")]
         api_get_member_mapinfo,
         [ApiUrl("api_req_hensei/change")]
+        [Description("編成")]
         api_req_hensei_change,
         [ApiUrl("api_req_kousyou/createship")]
+        [Description("建造")]
         api_req_kousyou_createship,
         [ApiUrl("api_req_kousyou/getship")]
+        [Description("入手")]
         api_req_kousyou_getship,
         [ApiUrl("api_req_kousyou/createitem")]
+        [Description("開発")]
         api_req_kousyou_createitem,
         [ApiUrl("api_req_map/start")]
         api_req_map_start,
