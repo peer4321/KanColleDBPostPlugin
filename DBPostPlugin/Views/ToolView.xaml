@@ -12,7 +12,7 @@
              Background="{DynamicResource ThemeBrushKey}"
              Foreground="{DynamicResource ActiveForegroundBrushKey}"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="480" d:DesignWidth="600">
     
     <UserControl.Resources>
         <ResourceDictionary>
@@ -59,69 +59,77 @@
             <TextBlock Text="最近送信したデータ"
                        Margin="0,10,0,8" />
 
-            <Border BorderBrush="{DynamicResource BorderBrushKey}"
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="300" />
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0"
+                        BorderBrush="{DynamicResource BorderBrushKey}"
                     BorderThickness="1"
                     Margin="8">
-                <ListView ItemsSource="{Binding Proxy.Records}"
+                    <ListView ItemsSource="{Binding Proxy.Records}"
                           ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
                           ScrollViewer.PanningMode="Both">
-                    <ListView.Resources>
-                        
-                    </ListView.Resources>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Width="35">
-                                <GridViewColumn.Header>
-                                    <TextBlock Text="" />
-                                </GridViewColumn.Header>
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Index}"
+                        <ListView.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Margin"
+                                        Value="5,4" />
+                            </Style>
+                        </ListView.Resources>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="25">
+                                    <GridViewColumn.Header>
+                                        <TextBlock Text="" />
+                                    </GridViewColumn.Header>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Index}"
                                                    Margin="0,3"
                                                    Opacity="0.5"
                                                    TextTrimming="None"
                                                    TextWrapping="NoWrap" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Width="140">
-                                <GridViewColumn.Header>
-                                    <TextBlock Text="日付" />
-                                </GridViewColumn.Header>
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Record.TimestampStr, Mode=OneWay}"
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="140">
+                                    <GridViewColumn.Header>
+                                        <TextBlock Text="日付" />
+                                    </GridViewColumn.Header>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Record.TimestampStr, Mode=OneWay}"
                                                    Margin="0,3"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Width="60">
-                                <GridViewColumn.Header>
-                                    <TextBlock Text="種類" />
-                                </GridViewColumn.Header>
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Record.ApiStr, Mode=OneWay}"
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="90">
+                                    <GridViewColumn.Header>
+                                        <TextBlock Text="種類" />
+                                    </GridViewColumn.Header>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Record.Type, Mode=OneWay}"
                                                    Margin="0,3" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                            <GridViewColumn Width="200">
-                                <GridViewColumn.Header>
-                                    <TextBlock Text="内容" />
-                                </GridViewColumn.Header>
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Record.Description, Mode=OneWay}"
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="300">
+                                    <GridViewColumn.Header>
+                                        <TextBlock Text="内容" />
+                                    </GridViewColumn.Header>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Record.Detail, Mode=OneWay}"
                                                    Margin="0,3" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </Border>
-
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

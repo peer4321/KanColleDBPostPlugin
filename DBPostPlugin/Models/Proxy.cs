@@ -15,8 +15,8 @@ namespace DBPostPlugin.Models
     {
         private DBPostPlugin plugin;
 
-        private IEnumerable<RecordViewModel> _Records;
-        public IEnumerable<RecordViewModel> Records
+        private List<RecordViewModel> _Records;
+        public List<RecordViewModel> Records
         {
             get { return this._Records; }
             set
@@ -35,9 +35,10 @@ namespace DBPostPlugin.Models
 
             var proxy = KanColleClient.Current.Proxy;
             
-            var urls = Enum.GetValues(typeof(Api)).Cast<Api>().Select(v => v.GetUrl()).ToList();
-            foreach (var url in urls)
+            var apis = Enum.GetValues(typeof(Api)).Cast<Api>().ToList();
+            foreach (var api in apis)
             {
+                var url = api.GetUrl();
                 proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery
                     .StartsWith("/kcsapi/" + url))
                     .Subscribe(x =>
@@ -63,17 +64,16 @@ namespace DBPostPlugin.Models
                             System.Net.WebClient wc = new System.Net.WebClient();
                             wc.UploadValuesAsync(new Uri("http://api.kancolle-db.net/2/"), post);
 #endif
+                            Records.Add(new RecordViewModel(Records.Count, new Record(DateTime.Now, api, x)));
+                            Records = new List<RecordViewModel>(Records);
+
                             if (ToolSettings.NotifyLog)
                                 this.Notify(Notification.Types.Test, "送信しました", x.Request.PathAndQuery);
                         }
                     });
             }
-
-
-            this.Records = new List<RecordViewModel> {
-                new RecordViewModel(1, new Record(DateTime.Now, Api.api_port_port, "母港の色々")),
-                new RecordViewModel(2, new Record(DateTime.Now, Api.api_get_member_mapinfo, "マップの情報")),
-            };
+            
+            this.Records = new List<RecordViewModel> { };
         }
 
         private void Notify(string type, string header, string body)

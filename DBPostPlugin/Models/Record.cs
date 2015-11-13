@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nekoxy;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +13,24 @@ namespace DBPostPlugin.Models
         public string TimestampStr { get { return Timestamp.ToString("yyyy-MM-dd HH:mm:ss"); } }
 
         public Api Api { get; }
-        public string ApiStr { get { return Api.GetDescription() ?? "知らない子"; } }
+        public string Type { get { return Api.GetDescription() ?? "知らない子"; } }
 
-        public string Description { get; }
+        public string Detail { get; }
 
-        public Record (DateTime timespamp, Api api, string description)
+        public Record (DateTime timestamp, Api api, Session s)
         {
-            this.Timestamp = timespamp;
+            this.Timestamp = timestamp;
             this.Api = api;
-            this.Description = description;
+            this.Detail = api.GetDetail() ?? GenDetail(api, s);
+        }
+
+        public static string GenDetail(Api api, Session s)
+        {
+            switch (api)
+            {
+                default:
+                    return "何も言えません";
+            }
         }
     }
     
