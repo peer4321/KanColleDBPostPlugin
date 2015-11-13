@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBPostPlugin.cs" />
+    <Compile Include="Models\Api.cs" />
     <Compile Include="Models\Proxy.cs" />
     <Compile Include="Models\Record.cs" />
     <Compile Include="Models\Settings\ToolSettings.cs" />

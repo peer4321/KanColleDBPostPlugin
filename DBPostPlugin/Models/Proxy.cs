@@ -1,8 +1,10 @@
 ﻿using DBPostPlugin.Models.Settings;
+using DBPostPlugin.ViewModels;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
@@ -13,40 +15,27 @@ namespace DBPostPlugin.Models
     {
         private DBPostPlugin plugin;
 
+        private IEnumerable<RecordViewModel> _Records;
+        public IEnumerable<RecordViewModel> Records
+        {
+            get { return this._Records; }
+            set
+            {
+                if (this._Records != value)
+                {
+                    this._Records = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
+
         public Proxy(DBPostPlugin plugin)
         {
             this.plugin = plugin;
 
             var proxy = KanColleClient.Current.Proxy;
             
-            string[] urls =
-            {
-                "api_port/port",
-                "api_get_member/ship2",
-                "api_get_member/ship3",
-                "api_get_member/slot_item",
-                "api_get_member/kdock",
-                "api_get_member/mapinfo",
-                "api_req_hensei/change",
-                "api_req_kousyou/createship",
-                "api_req_kousyou/getship",
-                "api_req_kousyou/createitem",
-                "api_req_map/start",
-                "api_req_map/next",
-                "api_req_map/select_eventmap_rank",
-                "api_req_sortie/battle",
-                "api_req_battle_midnight/battle",
-                "api_req_battle_midnight/sp_midnight",
-                "api_req_sortie/night_to_day",
-                "api_req_sortie/battleresult",
-                "api_req_combined_battle/battle",
-                "api_req_combined_battle/airbattle",
-                "api_req_combined_battle/midnight_battle",
-                "api_req_combined_battle/battleresult",
-                "api_req_sortie/airbattle",
-                "api_req_combined_battle/battle_water",
-                "api_req_combined_battle/sp_midnight",
-            };
+            var urls = Enum.GetValues(typeof(Api)).Cast<Api>().Select(v => v.GetUrl()).ToList();
             foreach (var url in urls)
             {
                 proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery
@@ -79,6 +68,12 @@ namespace DBPostPlugin.Models
                         }
                     });
             }
+
+
+            this.Records = new List<RecordViewModel> {
+                new RecordViewModel(1, new Record(DateTime.Now, Api.api_port_port, "母港の色々")),
+                new RecordViewModel(2, new Record(DateTime.Now, Api.api_get_member_mapinfo, "マップの情報")),
+            };
         }
 
         private void Notify(string type, string header, string body)

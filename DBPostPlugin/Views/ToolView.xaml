@@ -31,7 +31,7 @@
             <CheckBox Content="艦これ統計データベースへデータを送信します"
                       IsChecked="{Binding Source={x:Static ms:ToolSettings.SendDb}, Path=Value}"
                       Margin="20,10,0,0" />
-            
+
             <StackPanel IsEnabled="{Binding Source={x:Static ms:ToolSettings.SendDb}, Path=Value}"
                         Margin="40,6,0,6">
                 <Grid Margin="0,4">
@@ -47,11 +47,10 @@
                                          Text="{Binding Source={x:Static ms:ToolSettings.DbAccessKey},
                                                 Path=Value, Mode=TwoWay}" />
                 </Grid>
-            </StackPanel>
-
-            <CheckBox Content="データを送信した時に通知します"
+                <CheckBox Content="データを送信した時に通知します"
                       IsChecked="{Binding Source={x:Static ms:ToolSettings.NotifyLog}, Path=Value}"
-                      Margin="20,10,0,0" />
+                      Margin="0,10,0,0" />
+            </StackPanel>
 
             <Rectangle Height="1"
                        Style="{DynamicResource SeparatorRectangleStyleKey}"
@@ -63,7 +62,7 @@
             <Border BorderBrush="{DynamicResource BorderBrushKey}"
                     BorderThickness="1"
                     Margin="8">
-                <ListView ItemsSource="{Binding Records}"
+                <ListView ItemsSource="{Binding Proxy.Records}"
                           ItemContainerStyle="{DynamicResource GridViewItemContainerStyleKey}"
                           ScrollViewer.PanningMode="Both">
                     <ListView.Resources>
@@ -85,41 +84,35 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Width="150">
+                            <GridViewColumn Width="140">
                                 <GridViewColumn.Header>
-                                    <metro2:SortButton MethodName="SortRecord"
-                                                       MethodParameter="{x:Static vm:RecordSortWorker.TimestampColumn}">
-                                        <TextBlock Text="日付" />
-                                    </metro2:SortButton>
+                                    <TextBlock Text="日付" />
                                 </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding TimestampStr, Mode=OneWay}"
+                                        <TextBlock Text="{Binding Record.TimestampStr, Mode=OneWay}"
                                                    Margin="0,3"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Width="90">
+                            <GridViewColumn Width="60">
                                 <GridViewColumn.Header>
-                                    <metro2:SortButton MethodName="SortRecord"
-                                                       MethodParameter="{x:Static vm:RecordSortWorker.ApiColumn}">
-                                        <TextBlock Text="種類" />
-                                    </metro2:SortButton>
+                                    <TextBlock Text="種類" />
                                 </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding ApiStr, Mode=OneWay}"
+                                        <TextBlock Text="{Binding Record.ApiStr, Mode=OneWay}"
                                                    Margin="0,3" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Width="Auto">
+                            <GridViewColumn Width="200">
                                 <GridViewColumn.Header>
                                     <TextBlock Text="内容" />
                                 </GridViewColumn.Header>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Description, Mode=OneWay}"
+                                        <TextBlock Text="{Binding Record.Description, Mode=OneWay}"
                                                    Margin="0,3" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
