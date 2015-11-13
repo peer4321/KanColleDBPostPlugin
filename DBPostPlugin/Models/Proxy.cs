@@ -60,11 +60,16 @@ namespace DBPostPlugin.Models
                             post.Add("token", ToolSettings.DbAccessKey);
                             post.Add("agent", "LZXNXVGPejgSnEXLH2ur");
                             post.Add("url", x.Request.PathAndQuery);
-                            string requestBody = System.Text.RegularExpressions.Regex.Replace(x.Request.BodyAsString, @"&api(_|%5F)token=[0-9a-f]+|api(_|%5F)token=[0-9a-f]+&?", "");
+                            string requestBody = System.Text.RegularExpressions.Regex.Replace(
+                                x.Request.BodyAsString,
+                                @"&api(_|%5F)token=[0-9a-f]+|api(_|%5F)token=[0-9a-f]+&?", "");
                             post.Add("requestbody", requestBody);
                             post.Add("responsebody", x.Response.BodyAsString);
 #if DEBUG
-                            MessageBox.Show(string.Join("\n", post.AllKeys.Select(key => key + ": " + post[key])), "この内容を送信します");
+                            MessageBox.Show(
+                                string.Join(
+                                    "\n", post.AllKeys.Select(key => key + ": " + post[key])),
+                                    "この内容を送信します");
 #else
                             System.Net.WebClient wc = new System.Net.WebClient();
                             wc.UploadValuesAsync(new Uri("http://api.kancolle-db.net/2/"), post);
