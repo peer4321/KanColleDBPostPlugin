@@ -1,8 +1,10 @@
 ﻿using DBPostPlugin.Models.Settings;
+using DBPostPlugin.ViewModels;
 using Grabacr07.KanColleViewer.Composition;
 using Grabacr07.KanColleWrapper;
 using Livet;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
@@ -12,43 +14,50 @@ namespace DBPostPlugin.Models
     public class Proxy : NotificationObject
     {
         private DBPostPlugin plugin;
+        
+        private List<Record> Records;
+
+        private IReadOnlyCollection<RecordViewModel> _Rows;
+        public IReadOnlyCollection<RecordViewModel> Rows
+        {
+            get { return this._Rows; }
+            set
+            {
+                if (this._Rows != value)
+                {
+                    this._Rows = value;
+                    this.RaisePropertyChanged();
+                }
+            }
+        }
+
+        public RecordSortWorker SortWorker { get; }
+
+        public void SortRows(RecordSortWorker.SortableColumn column)
+        {
+            this.SortWorker.SetFirst(column);
+            this.UpdateRows();
+        }
+
+        private void UpdateRows()
+        {
+            this.Rows = this.SortWorker.Sort(this.Records)
+                .Select((x, i) => new RecordViewModel(i + 1, x))
+                .ToList();
+        }
 
         public Proxy(DBPostPlugin plugin)
         {
             this.plugin = plugin;
+            this.SortWorker = new RecordSortWorker();
+            this.Records = new List<Record>();
 
             var proxy = KanColleClient.Current.Proxy;
             
-            string[] urls =
+            var apis = Enum.GetValues(typeof(Api)).Cast<Api>().ToList();
+            foreach (var api in apis)
             {
-                "api_port/port",
-                "api_get_member/ship2",
-                "api_get_member/ship3",
-                "api_get_member/slot_item",
-                "api_get_member/kdock",
-                "api_get_member/mapinfo",
-                "api_req_hensei/change",
-                "api_req_kousyou/createship",
-                "api_req_kousyou/getship",
-                "api_req_kousyou/createitem",
-                "api_req_map/start",
-                "api_req_map/next",
-                "api_req_map/select_eventmap_rank",
-                "api_req_sortie/battle",
-                "api_req_battle_midnight/battle",
-                "api_req_battle_midnight/sp_midnight",
-                "api_req_sortie/night_to_day",
-                "api_req_sortie/battleresult",
-                "api_req_combined_battle/battle",
-                "api_req_combined_battle/airbattle",
-                "api_req_combined_battle/midnight_battle",
-                "api_req_combined_battle/battleresult",
-                "api_req_sortie/airbattle",
-                "api_req_combined_battle/battle_water",
-                "api_req_combined_battle/sp_midnight",
-            };
-            foreach (var url in urls)
-            {
+                var url = api.GetUrl();
                 proxy.ApiSessionSource.Where(x => x.Request.PathAndQuery
                     .StartsWith("/kcsapi/" + url))
                     .Subscribe(x =>
@@ -60,20 +69,29 @@ namespace DBPostPlugin.Models
                             post.Add("token", ToolSettings.DbAccessKey);
                             post.Add("agent", "LZXNXVGPejgSnEXLH2ur");
                             post.Add("url", x.Request.PathAndQuery);
-                            string requestBody = System.Text.RegularExpressions.Regex.Replace(x.Request.BodyAsString, @"&api(_|%5F)token=[0-9a-f]+|api(_|%5F)token=[0-9a-f]+&?", "");
+                            string requestBody = System.Text.RegularExpressions.Regex.Replace(
+                                x.Request.BodyAsString,
+                                @"&api(_|%5F)token=[0-9a-f]+|api(_|%5F)token=[0-9a-f]+&?", "");
                             post.Add("requestbody", requestBody);
                             post.Add("responsebody", x.Response.BodyAsString);
 #if DEBUG
-                            MessageBox.Show(string.Join("\n", post.AllKeys.Select(key => key + ": " + post[key])), "この内容を送信します");
+                            MessageBox.Show(
+                                string.Join(
+                                    "\n", post.AllKeys.Select(key => key + ": " + post[key])),
+                                    "この内容を送信します");
 #else
                             System.Net.WebClient wc = new System.Net.WebClient();
                             wc.UploadValuesAsync(new Uri("http://api.kancolle-db.net/2/"), post);
 #endif
+                            Records.Add(new Record(DateTime.Now, api, x));
+                            this.UpdateRows();
+
                             if (ToolSettings.NotifyLog)
                                 this.Notify(Notification.Types.Test, "送信しました", x.Request.PathAndQuery);
                         }
                     });
             }
+            
         }
 
         private void Notify(string type, string header, string body)

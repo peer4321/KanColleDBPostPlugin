@@ -2,6 +2,7 @@
 using Livet;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,14 +11,15 @@ namespace DBPostPlugin.ViewModels
 {
     public class ToolViewModel : ViewModel
     {
-        private readonly DBPostPlugin plugin;
+        private readonly DBPostPlugin _Plugin;
 
-        private readonly Proxy proxy;
-
+        public Proxy Proxy { get; }
+        
         public ToolViewModel(DBPostPlugin plugin)
         {
-            this.plugin = plugin;
-            this.proxy = new Proxy(plugin);
+            this._Plugin = plugin;
+            this.Proxy = new Proxy(plugin);
         }
+        
     }
 }

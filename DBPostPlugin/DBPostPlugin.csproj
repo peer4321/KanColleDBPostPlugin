@@ -134,7 +134,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBPostPlugin.cs" />
+    <Compile Include="Models\Api.cs" />
     <Compile Include="Models\Proxy.cs" />
+    <Compile Include="Models\Record.cs" />
     <Compile Include="Models\Settings\ToolSettings.cs" />
     <Compile Include="Models\Settings\Providers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -150,6 +152,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ViewModels\RecordSortWorker.cs" />
+    <Compile Include="ViewModels\RecordViewModel.cs" />
     <Compile Include="ViewModels\ToolViewModel.cs" />
     <Compile Include="Views\ToolView.xaml.cs">
       <DependentUpon>ToolView.xaml</DependentUpon>
