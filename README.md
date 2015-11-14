@@ -14,8 +14,8 @@
 
 ### ダウンロード
 
-* [![Build status](https://ci.appveyor.com/api/projects/status/fen8euuwhcuv1r5j/branch/master?svg=true)](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/branch/master)
-[KanColleDBPostPlugin (Master Branch) - AppVeyor](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/branch/master) (安定版)
+* [![Build status](https://ci.appveyor.com/api/projects/status/fen8euuwhcuv1r5j/branch/master?svg=true)](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/branch/master/artifacts)
+[KanColleDBPostPlugin_Master - AppVeyor](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/branch/master/artifacts) (安定版)
 * [![Build status](https://ci.appveyor.com/api/projects/status/fen8euuwhcuv1r5j?svg=true)](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/build/artifacts)
 [KanColleDBPostPlugin - AppVeyor](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/build/artifacts) (最新版)
 * ダウンロードしたDLLファイルのブロックを忘れずに解除してくださいね。
