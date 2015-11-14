@@ -14,24 +14,43 @@ namespace DBPostPlugin.Models
     public class Proxy : NotificationObject
     {
         private DBPostPlugin plugin;
+        
+        private List<Record> Records;
 
-        private List<RecordViewModel> _Records;
-        public List<RecordViewModel> Records
+        private IReadOnlyCollection<RecordViewModel> _Rows;
+        public IReadOnlyCollection<RecordViewModel> Rows
         {
-            get { return this._Records; }
+            get { return this._Rows; }
             set
             {
-                if (this._Records != value)
+                if (this._Rows != value)
                 {
-                    this._Records = value;
+                    this._Rows = value;
                     this.RaisePropertyChanged();
                 }
             }
         }
 
+        public RecordSortWorker SortWorker { get; }
+
+        public void SortRows(RecordSortWorker.SortableColumn column)
+        {
+            this.SortWorker.SetFirst(column);
+            this.UpdateRows();
+        }
+
+        private void UpdateRows()
+        {
+            this.Rows = this.SortWorker.Sort(this.Records)
+                .Select((x, i) => new RecordViewModel(i + 1, x))
+                .ToList();
+        }
+
         public Proxy(DBPostPlugin plugin)
         {
             this.plugin = plugin;
+            this.SortWorker = new RecordSortWorker();
+            this.Records = new List<Record>();
 
             var proxy = KanColleClient.Current.Proxy;
             
@@ -64,8 +83,8 @@ namespace DBPostPlugin.Models
                             System.Net.WebClient wc = new System.Net.WebClient();
                             wc.UploadValuesAsync(new Uri("http://api.kancolle-db.net/2/"), post);
 #endif
-                            Records.Add(new RecordViewModel(Records.Count, new Record(DateTime.Now, api, x)));
-                            Records = new List<RecordViewModel>(Records);
+                            Records.Add(new Record(DateTime.Now, api, x));
+                            this.UpdateRows();
 
                             if (ToolSettings.NotifyLog)
                                 this.Notify(Notification.Types.Test, "送信しました", x.Request.PathAndQuery);
@@ -73,7 +92,6 @@ namespace DBPostPlugin.Models
                     });
             }
             
-            this.Records = new List<RecordViewModel> { };
         }
 
         private void Notify(string type, string header, string body)
