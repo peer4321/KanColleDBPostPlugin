@@ -1,6 +1,6 @@
 ﻿# KanColleDBPostPlugin
 
-通信データを艦これ統計データベースへ送信する KanColleViewer 用プラグインのようなものです。
+通信データを艦これ統計データベースへ送信する KanColleViewer 用プラグインのようなものを勝手に作りました。
 
 ### インストール
 
@@ -14,8 +14,19 @@
 
 ### ダウンロード
 
-* [![Build status](https://ci.appveyor.com/api/projects/status/fen8euuwhcuv1r5j?svg=true)](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/build/artifacts) [KanColleDBPostPlugin - AppVeyor](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/build/artifacts)
+* [![Build status](https://ci.appveyor.com/api/projects/status/fen8euuwhcuv1r5j/branch/master?svg=true)](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/branch/master)
+[KanColleDBPostPlugin (Master Branch) - AppVeyor](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/branch/master) (安定版)
+* [![Build status](https://ci.appveyor.com/api/projects/status/fen8euuwhcuv1r5j?svg=true)](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/build/artifacts)
+[KanColleDBPostPlugin - AppVeyor](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/build/artifacts) (最新版)
 * ダウンロードしたDLLファイルのブロックを忘れずに解除してくださいね。
+
+### チェンジログ
+
+* 1.1.0 (Develop)
+  * 送信ログを表示
+  * 送信ログのソート機能
+* 1.0.0
+  * 送信機能
 
 ### ライセンス
 
