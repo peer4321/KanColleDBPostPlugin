@@ -1,6 +1,6 @@
 ﻿# KanColleDBPostPlugin
 
-通信データを艦これ統計データベースへ送信する KanColleViewer 用プラグインのようなものです。
+通信データを艦これ統計データベースへ送信する KanColleViewer 用プラグインのようなものを勝手に作りました。
 
 ### インストール
 
@@ -11,6 +11,24 @@
 * ツール→DBPostタブの艦これ統計データベースへデータを送信しますを有効にし、
 アクセスキーを入力することで使用できます。
 * 変更した設定は自動的に保存されます。
+
+### ダウンロード
+
+* [![Build status](https://ci.appveyor.com/api/projects/status/fen8euuwhcuv1r5j/branch/master?svg=true)](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/branch/master/artifacts)
+[KanColleDBPostPlugin_Master - AppVeyor](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/branch/master/artifacts) (安定版)
+* [![Build status](https://ci.appveyor.com/api/projects/status/fen8euuwhcuv1r5j?svg=true)](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/build/artifacts)
+[KanColleDBPostPlugin - AppVeyor](https://ci.appveyor.com/project/peer4321/kancolledbpostplugin/build/artifacts) (最新版)
+* ダウンロードしたDLLファイルのブロックを忘れずに解除してくださいね。
+
+### チェンジログ
+
+* 1.1.1
+  * 建造、開発、戦闘結果の詳細な内容
+* 1.1.0
+  * 送信ログを表示
+  * 送信ログのソート機能
+* 1.0.0
+  * 送信機能
 
 ### ライセンス
 
