@@ -12,7 +12,7 @@ namespace DBPostPlugin
     [ExportMetadata("Guid", "38022BEC-9578-4F4F-B8D7-A17B17CC57AD")]
     [ExportMetadata("Title", "KanColle DB Post")]
     [ExportMetadata("Description", "データをkancolle-db.netに送信します。")]
-    [ExportMetadata("Version", "1.1.0")]
+    [ExportMetadata("Version", "1.1.1")]
     [ExportMetadata("Author", "peer4321")]
 
     public class DBPostPlugin : IPlugin, ITool, IRequestNotify

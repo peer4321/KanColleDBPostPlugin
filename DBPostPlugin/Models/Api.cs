@@ -30,7 +30,7 @@ namespace DBPostPlugin.Models
         api_port_port,
 
         [UrlAttr("api_get_member/ship2")]
-        [Description("旧所持艦情報？")]
+        [Description("所持艦情報")]
         api_get_member_ship2,
 
         [UrlAttr("api_get_member/ship3")]
